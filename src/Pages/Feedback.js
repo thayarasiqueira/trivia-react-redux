@@ -44,7 +44,7 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
 });
 
-HeaderFeedback.propTypes = {
+Feedback.propTypes = {
   name: PropTypes.string.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,

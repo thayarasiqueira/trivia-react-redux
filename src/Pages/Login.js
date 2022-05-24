@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPlayerAction } from '../redux/actions';
+import { addPlayerAction, getToken } from '../redux/actions';
 import logo from '../trivia.png';
 
 class Login extends React.Component {
@@ -35,12 +35,13 @@ class Login extends React.Component {
     }
   }
 
-  handleClickPlay = () => {
+  handleClickPlay = async () => {
     const { name, email } = this.state;
-    const { userLogin, history } = this.props;
-
+    const { userLogin, history, tokenAction } = this.props;
+    const token = await tokenAction();
+    localStorage.setItem('token', token.token);
     userLogin(name, email);
-    history.push('/gameplay');
+    history.push('/game');
   }
 
   render() {
@@ -93,11 +94,13 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   userLogin: (name, gravatarEmail) => dispatch(addPlayerAction(name, gravatarEmail)),
+  tokenAction: () => dispatch(getToken()),
 });
 
-FormLogin.propTypes = {
+Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   userLogin: PropTypes.func.isRequired,
+  tokenAction: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

@@ -11,7 +11,7 @@ export default function App() {
     <div className="App">
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/gameplay" component={ Game } />
+        <Route path="/game" component={ Game } />
         <Route path="/feedback" component={ Feedback } />
         <Route path="/raking" component={ Raking } />
       </Switch>
