@@ -42,6 +42,13 @@ class Login extends React.Component {
     localStorage.setItem('token', token.token);
     userLogin(name, email);
     history.push('/game');
+ }
+
+  handleClickSett = (event) => {
+    event.preventDefault();
+    const { history } = this.props;
+    history.push('/settings');
+
   }
 
   render() {
@@ -77,13 +84,13 @@ class Login extends React.Component {
               Play
             </button>
 
-            {/* <button
+            <button
               type="button"
-              data-testid="btn-play"
+              data-testid="btn-settings"
               onClick={ this.handleClickSett }
             >
               Settings
-            </button> */}
+            </button>
           </div>
         </header>
       </div>
