@@ -61,3 +61,10 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.formLoginAll {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px;
+}
