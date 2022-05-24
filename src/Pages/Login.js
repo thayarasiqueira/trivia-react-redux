@@ -40,7 +40,13 @@ class Login extends React.Component {
     const { userLogin, history } = this.props;
 
     userLogin(name, email);
-    history.push('/gameplay');
+    history.push('/game');
+  }
+
+  handleClickSett = (event) => {
+    event.preventDefault();
+    const { history } = this.props;
+    history.push('/settings');
   }
 
   render() {
@@ -76,13 +82,13 @@ class Login extends React.Component {
               Play
             </button>
 
-            {/* <button
+            <button
               type="button"
-              data-testid="btn-play"
+              data-testid="btn-settings"
               onClick={ this.handleClickSett }
             >
               Settings
-            </button> */}
+            </button>
           </div>
         </header>
       </div>
@@ -95,7 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   userLogin: (name, gravatarEmail) => dispatch(addPlayerAction(name, gravatarEmail)),
 });
 
-FormLogin.propTypes = {
+Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   userLogin: PropTypes.func.isRequired,
 };
