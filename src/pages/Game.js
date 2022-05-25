@@ -13,6 +13,8 @@ class Game extends React.Component {
       counter: 0,
       questionState: [''],
       answers: [''],
+      correct: 'black',
+      incorrect: 'black',
       timeOut: false,
       clicked: false,
       fim: false,
@@ -45,6 +47,13 @@ class Game extends React.Component {
     this.setState({ answers: [...randomAnsArray] });
   }
 
+  handleColor = () => {
+    this.setState({
+      correct: 'solid rgb(6, 240, 15) 3px',
+      incorrect: 'solid red 3px',
+    });
+  }
+
   handleTimer = (timeOut) => {
     if (timeOut) this.setState({ timeOut });
   }
@@ -71,8 +80,8 @@ class Game extends React.Component {
   }
 
   render() {
-    const { counter, questionState, answers, clicked, fim, timeOut } = this.state;
-
+    const { counter, questionState, answers, clicked,
+      fim, timeOut, incorrect, correct } = this.state;
     return (
       <div className="game-all">
         <Header />
@@ -97,24 +106,36 @@ class Game extends React.Component {
                     ? (
                       <button
                         data-testid="correct-answer"
+                        style={ { border: [correct] } }
                         className="correct-answer"
                         type="button"
+                        onClick={ () => {
+                          this.handleColor();
+                          this.handleAnsBtn();
+                        } }
                         disabled={ timeOut }
-                        onClick={ this.handleAnsBtn }
                       >
-                        { ans.correct_answer }
+                        <p>
+                          { ans.correct_answer }
+                        </p>
                       </button>
                     )
                     : (
                       <button
                         data-testid={ `wrong-answer-${ans.index}` }
+                        style={ { border: [incorrect] } }
                         className="incorrect-answer"
                         type="button"
+                        onClick={ () => {
+                          this.handleColor();
+                          this.handleAnsBtn();
+                        } }
                         disabled={ timeOut }
-                        onClick={ this.handleAnsBtn }
                         key={ ans.index }
                       >
-                        { ans.incorrect_answers }
+                        <p>
+                          { ans.incorrect_answers }
+                        </p>
                       </button>
                     )
                 ))}
