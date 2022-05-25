@@ -144,8 +144,8 @@ const mapStateToProps = (state) => ({
 
 Game.propTypes = {
   questions: PropTypes.shape.isRequired,
-  score: PropTypes.number.isRequired,
-  assertions: PropTypes.number.isRequired,
+  // score: PropTypes.number.isRequired,
+  // assertions: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
