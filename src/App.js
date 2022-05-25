@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import './App.css';
-import Login from './Pages/Login';
-import Game from './Pages/Game';
-import Feedback from './Pages/Feedback';
-import Raking from './Pages/Raking';
-import Settings from './Pages/Settings';
+import Login from './pages/Login';
+import Game from './pages/Game';
+import Feedback from './pages/Feedback';
+import Raking from './pages/Raking';
+import Settings from './pages/Settings';
 
 export default function App() {
   return (
