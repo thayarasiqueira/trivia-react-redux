@@ -14,11 +14,11 @@ class Ranking extends React.Component {
   handleButton = () => {
     const { history } = this.props;
     history.push('/');
-  }
+  };
 
   componentDidMount = async () => {
     this.seState({ ranking: JSON.parse(localStorage.getItem('ranking')) });
-  }
+  };
 
   render() {
     const { ranking } = this.state;
@@ -34,8 +34,16 @@ class Ranking extends React.Component {
           Voltar ao início
         </button>
         <div>
-          { ranking.map((player) => player.name && player.score && player.picture)}
-
+          {ranking.map((player, index) => (
+            <div key={ player }>
+              <p data-testid={ `player-name-${index}` }>
+                {player.name}
+              </p>
+              <p data-testid={ `player-score-${index}` }>
+                {player.score}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     );
