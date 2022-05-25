@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getQuestion } from '../redux/actions';
 import Header from '../componentes/Header';
+import Timer from '../componentes/Timer';
 
 class Game extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class Game extends React.Component {
       counter: 0,
       questionState: [''],
       answers: [''],
+      timeOut: false,
       clicked: false,
       fim: false,
     };
@@ -43,6 +45,10 @@ class Game extends React.Component {
     this.setState({ answers: [...randomAnsArray] });
   }
 
+  handleTimer = (timeOut) => {
+    if (timeOut) this.setState({ timeOut });
+  }
+
   handleAnsBtn = () => {
     this.setState({ clicked: true });
     const { counter } = this.state;
@@ -65,12 +71,13 @@ class Game extends React.Component {
   }
 
   render() {
-    const { counter, questionState, answers, clicked, fim } = this.state;
+    const { counter, questionState, answers, clicked, fim, timeOut } = this.state;
 
     return (
       <div className="game-all">
         <Header />
         <h1 data-testid="game-title" className="game-title">IT`S GAME TIME</h1>
+        <Timer timeIsOut={ this.handleTimer } />
         { questionState.length !== 0
           && (
             <div className="questionBox">
@@ -81,32 +88,33 @@ class Game extends React.Component {
                 { questionState[counter].question}
               </h2>
 
-              <div className="answersClass">
+              <div
+                className="answersClass"
+                data-testid="answer-options"
+              >
                 { answers.map((ans) => (
                   ans.correct_answer
                     ? (
                       <button
-                        data-testid="answer-options"
+                        data-testid="correct-answer"
                         className="correct-answer"
                         type="button"
+                        disabled={ timeOut }
                         onClick={ this.handleAnsBtn }
                       >
-                        <p data-testid="correct-answer">
-                          { ans.correct_answer }
-                        </p>
+                        { ans.correct_answer }
                       </button>
                     )
                     : (
                       <button
-                        data-testid="answer-options"
+                        data-testid={ `wrong-answer-${ans.index}` }
                         className="incorrect-answer"
                         type="button"
+                        disabled={ timeOut }
                         onClick={ this.handleAnsBtn }
                         key={ ans.index }
                       >
-                        <p data-testid={ `wrong-answer-${ans.index}` }>
-                          { ans.incorrect_answers }
-                        </p>
+                        { ans.incorrect_answers }
                       </button>
                     )
                 ))}
