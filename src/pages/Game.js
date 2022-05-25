@@ -14,6 +14,8 @@ class Game extends React.Component {
       questionState: [''],
       answers: [''],
       timeOut: false,
+      clicked: false,
+      fim: false,
     };
   }
 
@@ -47,8 +49,29 @@ class Game extends React.Component {
     if (timeOut) this.setState({ timeOut });
   }
 
+  handleAnsBtn = () => {
+    this.setState({ clicked: true });
+    const { counter } = this.state;
+    console.log('Contador', counter);
+  }
+
+  handleNextBtn = () => {
+    const { counter } = this.state;
+    const plus = Number(counter) + 1;
+    console.log('Contador', counter, 'Plus', plus);
+    const MAX_ANSWERS = 4;
+    if (counter < MAX_ANSWERS) {
+      const { questions } = this.props;
+      this.setState({ counter: plus, clicked: false });
+      this.createAnswers(questions[Number(counter)]);
+    } else {
+      const { history } = this.props;
+      history.push('/feedback');
+    }
+  }
+
   render() {
-    const { counter, questionState, answers, timeOut } = this.state;
+    const { counter, questionState, answers, clicked, fim, timeOut } = this.state;
 
     return (
       <div className="game-all">
@@ -77,6 +100,7 @@ class Game extends React.Component {
                         className="correct-answer"
                         type="button"
                         disabled={ timeOut }
+                        onClick={ this.handleAnsBtn }
                       >
                         { ans.correct_answer }
                       </button>
@@ -87,6 +111,8 @@ class Game extends React.Component {
                         className="incorrect-answer"
                         type="button"
                         disabled={ timeOut }
+                        onClick={ this.handleAnsBtn }
+                        key={ ans.index }
                       >
                         { ans.incorrect_answers }
                       </button>
@@ -95,6 +121,24 @@ class Game extends React.Component {
               </div>
             </div>
           )}
+
+        { (clicked === true) ? (
+          <button
+            type="button"
+            onClick={ this.handleNextBtn }
+            data-testid="btn-next"
+          >
+            Next
+          </button>
+        ) : (
+          <p className="nada">Nada</p>
+        )}
+
+        { (fim === true) ? (
+          <h2>ACABOU OTÁRIO</h2>
+        ) : (
+          <p className="nada">Nada</p>
+        )}
       </div>
     );
   }
@@ -102,10 +146,14 @@ class Game extends React.Component {
 
 const mapStateToProps = (state) => ({
   questions: state.question.results,
+  score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 Game.propTypes = {
   questions: PropTypes.shape.isRequired,
+  // score: PropTypes.number.isRequired,
+  // assertions: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
