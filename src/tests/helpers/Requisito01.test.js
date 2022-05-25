@@ -91,6 +91,7 @@ describe('Requisito 04 - Testando a Pagina de Login', () => {
     expect(history.location.pathname).toBe('/settings');
   })
 
+  
   // it('06 - Testando o Local Storage', () => {
   //   const { history } = renderWithRouterAndRedux(<Login />);
 

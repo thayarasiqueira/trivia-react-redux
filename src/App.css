@@ -71,7 +71,7 @@ body {
 
 .questionBox {
   align-items: center;
-  border: solid black 2px;
+  border: solid black 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;

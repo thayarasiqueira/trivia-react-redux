@@ -12,6 +12,8 @@ class Game extends React.Component {
       counter: 0,
       questionState: [''],
       answers: [''],
+      correct: 'black',
+      incorrect: 'black',
     };
   }
 
@@ -41,9 +43,15 @@ class Game extends React.Component {
     this.setState({ answers: [...randomAnsArray] });
   }
 
-  render() {
-    const { counter, questionState, answers } = this.state;
+  handleColor = () => {
+    this.setState({
+      correct: 'solid rgb(6, 240, 15) 3px',
+      incorrect: 'solid red 3px',
+    });
+  }
 
+  render() {
+    const { counter, questionState, answers, incorrect, correct } = this.state;
     return (
       <div className="game-all">
         <Header />
@@ -66,8 +74,12 @@ class Game extends React.Component {
                         data-testid="answer-options"
                         className="correct-answer"
                         type="button"
+                        onClick={ this.handleColor }
                       >
-                        <p data-testid="correct-answer">
+                        <p
+                          style={ { border: [correct] } }
+                          data-testid="correct-answer"
+                        >
                           { ans.correct_answer }
                         </p>
                       </button>
@@ -77,8 +89,12 @@ class Game extends React.Component {
                         data-testid="answer-options"
                         className="incorrect-answer"
                         type="button"
+                        onClick={ this.handleColor }
                       >
-                        <p data-testid={ `wrong-answer-${ans.index}` }>
+                        <p
+                          style={ { border: [incorrect] } }
+                          data-testid={ `wrong-answer-${ans.index}` }
+                        >
                           { ans.incorrect_answers }
                         </p>
                       </button>

@@ -2,6 +2,7 @@ export const ADD_PLAYER = 'ADD_PLAYER';
 export const ADD_POINTS = 'ADD_POINTS';
 export const GET_TOKEN = 'GET_TOKEN';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const SELECT_ANSWER = 'SELECT_ANSWER';
 
 export function addPlayerAction(name, gravatarEmail) {
   return {
@@ -19,6 +20,15 @@ export function addScoreAction(score, assertions) {
     payload: {
       score,
       assertions,
+    },
+  };
+}
+
+export function selectAnswerAction(answer) {
+  return {
+    type: SELECT_ANSWER,
+    payload: {
+      answer,
     },
   };
 }
