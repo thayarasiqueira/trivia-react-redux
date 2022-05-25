@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addPlayerAction, getToken } from '../redux/actions';
 import logo from '../trivia.png';
 
@@ -37,18 +38,10 @@ class Login extends React.Component {
 
   handleClickPlay = async () => {
     const { name, email } = this.state;
-    const { userLogin, history, tokenAction } = this.props;
-    const token = await tokenAction();
-    localStorage.setItem('token', token.token);
+    const { userLogin, tokenAction, history } = this.props;
+    await tokenAction();
     userLogin(name, email);
     history.push('/game');
- }
-
-  handleClickSett = (event) => {
-    event.preventDefault();
-    const { history } = this.props;
-    history.push('/settings');
-
   }
 
   render() {
@@ -58,6 +51,7 @@ class Login extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
+
           <div className="formLoginAll">
             <input
               name="name"
@@ -84,17 +78,17 @@ class Login extends React.Component {
               Play
             </button>
 
-            <button
-              type="button"
-              data-testid="btn-settings"
-              onClick={ this.handleClickSett }
-            >
-              Settings
-            </button>
+            <Link to="/settings">
+              <button
+                type="button"
+                data-testid="btn-settings"
+              >
+                Settings
+              </button>
+            </Link>
           </div>
         </header>
       </div>
-
     );
   }
 }

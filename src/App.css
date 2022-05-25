@@ -68,3 +68,31 @@ body {
   gap: 10px;
   margin: 20px;
 }
+
+.questionBox {
+  align-items: center;
+  border: solid black 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 70%;
+}
+
+.game-all {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-all {
+  background-color: darkslategray;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  width: 100%;
+}
+
+.game-title {
+  color: rgb(107, 15, 15);
+  font-size: 40px;
+}
