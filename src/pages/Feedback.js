@@ -17,7 +17,6 @@ class Feedback extends React.Component {
     const { gravatarEmail } = this.props;
     const urlImg = await md5(gravatarEmail).toString();
     this.setState({ urlImg });
-    // console.log(urlImg);
     this.changeMsg();
   }
 
