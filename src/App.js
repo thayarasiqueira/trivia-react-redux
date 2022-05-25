@@ -4,7 +4,7 @@ import './App.css';
 import Login from './pages/Login';
 import Game from './pages/Game';
 import Feedback from './pages/Feedback';
-import Raking from './pages/Raking';
+import Ranking from './pages/Ranking';
 import Settings from './pages/Settings';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/game" component={ Game } />
         <Route path="/settings" component={ Settings } />
         <Route path="/feedback" component={ Feedback } />
-        <Route path="/raking" component={ Raking } />
+        <Route path="/ranking" component={ Ranking } />
       </Switch>
     </div>
   );

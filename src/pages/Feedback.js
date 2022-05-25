@@ -9,6 +9,7 @@ class Feedback extends React.Component {
 
     this.state = {
       urlImg: '',
+      feedbackMsg: '',
     };
   }
 
@@ -16,12 +17,22 @@ class Feedback extends React.Component {
     const { gravatarEmail } = this.props;
     const urlImg = await md5(gravatarEmail).toString();
     this.setState({ urlImg });
-    // console.log(urlImg);
+    this.changeMsg();
+  }
+
+  changeMsg = () => {
+    const { assertions } = this.props;
+    const ASSERTIONS = 3;
+    if (assertions < ASSERTIONS) {
+      this.setState({ feedbackMsg: 'Could be better...' });
+    } else {
+      this.setState({ feedbackMsg: 'Well Done!' });
+    }
   }
 
   render() {
     const { name, score } = this.props;
-    const { urlImg } = this.state;
+    const { urlImg, feedbackMsg } = this.state;
 
     return (
       <div className="headerFBAll">
@@ -34,6 +45,10 @@ class Feedback extends React.Component {
           <h2 data-testid="header-player-name">{ name }</h2>
           <h2 data-testid="header-score">{ score }</h2>
         </header>
+
+        <div className="feedback-text">
+          <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
+        </div>
       </div>
     );
   }
@@ -42,12 +57,14 @@ class Feedback extends React.Component {
 const mapStateToProps = (state) => ({
   name: state.player.name,
   score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 Feedback.propTypes = {
   name: PropTypes.string.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);

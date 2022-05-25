@@ -7,6 +7,15 @@ import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import initialStore1 from './data';
 
 describe('Requisito 04 - Testando a Pagina de Login', () => {
+  const historyMock = { push: jest.fn() } 
+
+  // jest.mock('react-router-dom', () => ({
+  //   ...jest.requireActual('react-router-dom'),
+  //   useHistory: () => ({
+  //     push: mockHistoryPush,
+  //   }),
+  // }));
+
   it('00 - Testando se o componente se chama Login e esta na pasta "src/Pages"', () => {
     const { container } = renderWithRouterAndRedux(<Login />, '/', {});
     expect(container).toBeDefined();
@@ -66,7 +75,7 @@ describe('Requisito 04 - Testando a Pagina de Login', () => {
   })
 
   it('04 - Testando funcionalidade do botão Play - Push', () => {
-    const { history } = renderWithRouterAndRedux(<Login />);
+    renderWithRouterAndRedux(<Login />);
 
     const btnPlay = screen.getByTestId('btn-play');
     const inputName = screen.getByTestId('input-player-name');
@@ -77,7 +86,14 @@ describe('Requisito 04 - Testando a Pagina de Login', () => {
     expect(btnPlay).not.toBeDisabled();
     userEvent.click(btnPlay);
 
-    expect(history.location.pathname).toBe('/game');
+    // expect(mockHistoryPush).toHaveBeenCalledWith('/game');
+    // expect(history.location.pathname).toBe('/game');
+
+    expect(historyMock.push.mock.calls[0]).toEqual([
+      {
+        pathname: "/game", // URL
+      },
+    ]);
   })
 
   it('05 - Testando funcionalidade do botão Settings - Push', () => {
@@ -90,22 +106,4 @@ describe('Requisito 04 - Testando a Pagina de Login', () => {
 
     expect(history.location.pathname).toBe('/settings');
   })
-
-  
-  // it('06 - Testando o Local Storage', () => {
-  //   const { history } = renderWithRouterAndRedux(<Login />);
-
-  //   const btnPlay = screen.getByTestId('btn-play');
-  //   const inputName = screen.getByTestId('input-player-name');
-  //   const inputEmail = screen.getByTestId('input-gravatar-email');
-
-  //   userEvent.type(inputEmail, 'test@test.com');
-  //   userEvent.type(inputName, 'teste');
-  //   expect(btnPlay).not.toBeDisabled();
-  //   userEvent.click(btnPlay);
-
-  //   const mockData = jest.spyOn(window.localStorage, "setItem");
-
-  //   expect(mockData).toHaveBeenCalledTimes(1);
-  // })
 });
