@@ -39,8 +39,7 @@ class Login extends React.Component {
   handleClickPlay = async () => {
     const { name, email } = this.state;
     const { userLogin, tokenAction, history } = this.props;
-    const token = await tokenAction();
-    localStorage.setItem('token', token.token);
+    await tokenAction();
     userLogin(name, email);
     history.push('/game');
   }
@@ -52,6 +51,7 @@ class Login extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
+
           <div className="formLoginAll">
             <input
               name="name"
@@ -69,7 +69,6 @@ class Login extends React.Component {
               onChange={ this.handleChange }
             />
 
-            {/* <Link to='/game'> */}
             <button
               type="button"
               data-testid="btn-play"
@@ -78,13 +77,11 @@ class Login extends React.Component {
             >
               Play
             </button>
-            {/* </Link> */}
 
             <Link to="/settings">
               <button
                 type="button"
                 data-testid="btn-settings"
-                // onClick={ this.handleClickSett }
               >
                 Settings
               </button>

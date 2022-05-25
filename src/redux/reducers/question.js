@@ -5,7 +5,7 @@ const INITIAL_STATE = {};
 function question(state = INITIAL_STATE, action) {
   switch (action.type) {
   case ADD_QUESTION:
-    return { ...state, question: action.payload };
+    return { ...action.payload };
   default:
     return state;
   }
