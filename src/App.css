@@ -100,11 +100,3 @@ body {
 .nada {
   color: white;
 }
-
-.correct-answer {
-  border: solid black 1px;
-}
-
-.incorrect-answer {
-  border: solid black 1px;
-}
