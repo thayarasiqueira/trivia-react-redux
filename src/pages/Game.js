@@ -18,6 +18,7 @@ class Game extends React.Component {
       timeOut: false,
       clicked: false,
       fim: false,
+      timer: 30,
     };
   }
 
@@ -31,6 +32,7 @@ class Game extends React.Component {
     const { questions } = this.props;
     this.setState({ questionState: questions });
     this.createAnswers(questions[0]);
+    this.handleTimer();
   }
 
   createAnswers = (question) => {
@@ -54,8 +56,30 @@ class Game extends React.Component {
     });
   }
 
-  handleTimer = (timeOut) => {
-    if (timeOut) this.setState({ timeOut });
+  handleTimer = () => {
+    const INTERVAL = 1000;
+    const TIME_OUT = 0;
+    this.setState({ timer: 30 });
+
+    const countdown = setInterval(() => {
+      const { clicked } = this.state;
+      this.setState((prevState) => {
+        if (clicked) {
+          clearInterval(countdown);
+        } else {
+          return {
+            timer: prevState.timer - 1,
+          };
+        }
+      }, () => {
+        const { timer: seconds } = this.state;
+
+        if (seconds === TIME_OUT) {
+          clearInterval(countdown);
+          this.setState({ timeOut: true, clicked: true });
+        }
+      });
+    }, INTERVAL);
   }
 
   handleAnsBtn = () => {
@@ -73,22 +97,26 @@ class Game extends React.Component {
         clicked: false,
         correct: 'solid black 1px',
         incorrect: 'solid black 1px',
+        timeOut: false,
       });
       this.createAnswers(questions[Number(counter)]);
     } else {
       const { history } = this.props;
       history.push('/feedback');
     }
+    this.handleTimer();
   }
 
   render() {
     const { counter, questionState, answers, clicked,
-      fim, timeOut, incorrect, correct } = this.state;
+      fim, timeOut, incorrect, correct, timer } = this.state;
     return (
       <div className="game-all">
         <Header />
         <h1 data-testid="game-title" className="game-title">IT`S GAME TIME</h1>
-        <Timer timeIsOut={ this.handleTimer } />
+        <Timer
+          timer={ timer }
+        />
         { questionState.length !== 0
           && (
             <div className="questionBox">
