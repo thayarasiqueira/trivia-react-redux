@@ -96,3 +96,15 @@ body {
   color: rgb(107, 15, 15);
   font-size: 40px;
 }
+
+.nada {
+  color: white;
+}
+
+.correct-answer {
+  border: solid black 1px;
+}
+
+.incorrect-answer {
+  border: solid black 1px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 
 class Feedback extends React.Component {
@@ -48,6 +49,26 @@ class Feedback extends React.Component {
 
         <div className="feedback-text">
           <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
+        </div>
+
+        <div className="buttons">
+          <Link to="/">
+            <button
+              type="button"
+              data-testid="btn-play-again"
+            >
+              Play again
+            </button>
+          </Link>
+
+          <Link to="/ranking">
+            <button
+              type="button"
+              data-testid="btn-ranking"
+            >
+              Ranking
+            </button>
+          </Link>
         </div>
       </div>
     );

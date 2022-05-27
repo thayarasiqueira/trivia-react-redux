@@ -60,18 +60,20 @@ class Game extends React.Component {
 
   handleAnsBtn = () => {
     this.setState({ clicked: true });
-    const { counter } = this.state;
-    console.log('Contador', counter);
   }
 
   handleNextBtn = () => {
     const { counter } = this.state;
     const plus = Number(counter) + 1;
-    console.log('Contador', counter, 'Plus', plus);
     const MAX_ANSWERS = 4;
     if (counter < MAX_ANSWERS) {
       const { questions } = this.props;
-      this.setState({ counter: plus, clicked: false });
+      this.setState({
+        counter: plus,
+        clicked: false,
+        correct: 'solid black 1px',
+        incorrect: 'solid black 1px',
+      });
       this.createAnswers(questions[Number(counter)]);
     } else {
       const { history } = this.props;
