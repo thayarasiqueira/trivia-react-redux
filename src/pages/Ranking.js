@@ -4,25 +4,23 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Ranking extends React.Component {
-  // constructor() {
-  //   super();
+  constructor() {
+    super();
 
-  //   this.state = {
-  //     ranking: [],
-  //   };
-  // }
+    this.state = {
+      ranking: [],
+    };
+  }
 
-  // // handleButton = () => {
-  // //   const { history } = this.props;
-  // //   history.push('/');
-  // // };
-
-  // componentDidMount = async () => {
-  //   this.seState({ ranking: JSON.parse(localStorage.getItem('ranking')) });
-  // };
+  componentDidMount() {
+    const arrayOfPlayers = JSON.parse(localStorage.getItem('ranking') || '[]');
+    const ranking = arrayOfPlayers.sort((a, b) => b.score - a.score);
+    console.log(ranking);
+    this.setState({ ranking });
+  }
 
   render() {
-    // const { ranking } = this.state;
+    const { ranking } = this.state;
 
     return (
       <div>
@@ -32,23 +30,19 @@ class Ranking extends React.Component {
           <button
             type="button"
             data-testid="btn-go-home"
-            // onClick={ this.handleButton }
           >
             Play again
           </button>
         </Link>
-        {/* <div>
-          {ranking.map((player, index) => (
-            <div key={ player }>
-              <p data-testid={ `player-name-${index}` }>
-                {player.name}
-              </p>
-              <p data-testid={ `player-score-${index}` }>
-                {player.score}
-              </p>
-            </div>
-          ))}
-        </div> */}
+        <section>
+          <ul>
+            {ranking.map((player, index) => (
+              <li key={ index }>
+                <span data-testid={ `player-name-${index}` }>{ player.name }</span>
+                <span data-testid={ `player-score-${index}` }>{ player.score }</span>
+              </li>))}
+          </ul>
+        </section>
       </div>
     );
   }
