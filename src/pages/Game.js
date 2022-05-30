@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getQuestion } from '../redux/actions';
+import { getQuestion, addScoreAction } from '../redux/actions';
 import Header from '../componentes/Header';
 import Timer from '../componentes/Timer';
 
@@ -99,12 +99,42 @@ class Game extends React.Component {
         incorrect: 'solid black 1px',
         timeOut: false,
       });
-      this.createAnswers(questions[Number(counter)]);
+      this.createAnswers(questions[Number(plus)]);
     } else {
       const { history } = this.props;
       history.push('/feedback');
     }
     this.handleTimer();
+  }
+
+  handlePoints = () => {
+    const { dispatch, score, assertions } = this.props;
+    const points = this.calculatePoints();
+    const newScore = score + points;
+    const newAss = assertions + 1;
+    dispatch(addScoreAction(newScore, newAss));
+  }
+
+  calculatePoints = () => {
+    const { counter, questionState, timer } = this.state;
+    const DEZ = 10;
+    if (questionState[counter].difficulty === 'easy') {
+      const points = (DEZ + timer);
+      console.log(points);
+      return points;
+    } if (questionState[counter].difficulty === 'medium') {
+      const mult = 2;
+      const points = (DEZ + (timer * mult));
+      console.log(points);
+      return points;
+    } if (questionState[counter].difficulty === 'hard') {
+      const mult = 3;
+      const points = (DEZ + (timer * mult));
+      console.log(points);
+      return points;
+    }
+    const points = 0;
+    return points;
   }
 
   render() {
@@ -142,6 +172,7 @@ class Game extends React.Component {
                         onClick={ () => {
                           this.handleColor();
                           this.handleAnsBtn();
+                          this.handlePoints();
                         } }
                         disabled={ timeOut }
                       >
@@ -201,10 +232,15 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
 });
 
+// const mapDispatchToProps = (dispatch) => ({
+//   addScore: (score, assertions) => dispatch(addScoreAction(score, assertions)),
+// });
+
 Game.propTypes = {
   questions: PropTypes.shape.isRequired,
-  // score: PropTypes.number.isRequired,
-  // assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
+  // addScore: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };
