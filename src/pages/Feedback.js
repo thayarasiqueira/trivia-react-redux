@@ -14,9 +14,9 @@ class Feedback extends React.Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     const { gravatarEmail } = this.props;
-    const urlImg = await md5(gravatarEmail).toString();
+    const urlImg = md5(gravatarEmail).toString();
     this.setState({ urlImg });
     this.changeMsg();
   }
@@ -32,12 +32,12 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { name, score } = this.props;
+    const { name, score, assertions } = this.props;
     const { urlImg, feedbackMsg } = this.state;
 
     return (
       <div className="headerFBAll">
-        <header>
+        <header className="header-all">
           <img
             data-testid="header-profile-picture"
             src={ `https://www.gravatar.com/avatar/${urlImg}` }
@@ -46,6 +46,11 @@ class Feedback extends React.Component {
           <h2 data-testid="header-player-name">{ name }</h2>
           <h2 data-testid="header-score">{ score }</h2>
         </header>
+
+        <div className="feedback">
+          <h2 data-testid="feedback-total-score">{ score }</h2>
+          <h2 data-testid="feedback-total-question">{ assertions }</h2>
+        </div>
 
         <div className="feedback-text">
           <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
