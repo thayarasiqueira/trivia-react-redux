@@ -14,9 +14,9 @@ class Feedback extends React.Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     const { gravatarEmail } = this.props;
-    const urlImg = await md5(gravatarEmail).toString();
+    const urlImg = md5(gravatarEmail).toString();
     this.setState({ urlImg });
     this.changeMsg();
   }
@@ -37,7 +37,7 @@ class Feedback extends React.Component {
 
     return (
       <div className="headerFBAll">
-        <header>
+        <header className="header-all">
           <img
             data-testid="header-profile-picture"
             src={ `https://www.gravatar.com/avatar/${urlImg}` }
