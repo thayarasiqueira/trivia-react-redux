@@ -1,4 +1,4 @@
-import { ADD_PLAYER } from '../actions';
+import { ADD_PLAYER, ADD_POINTS } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -10,6 +10,8 @@ const INITIAL_STATE = {
 function player(state = INITIAL_STATE, action) {
   switch (action.type) {
   case ADD_PLAYER:
+    return { ...state, ...action.payload };
+  case ADD_POINTS:
     return { ...state, ...action.payload };
   default:
     return state;
