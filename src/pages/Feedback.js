@@ -14,11 +14,27 @@ class Feedback extends React.Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { gravatarEmail } = this.props;
-    const urlImg = md5(gravatarEmail).toString();
+    const urlImg = await md5(gravatarEmail).toString();
     this.setState({ urlImg });
     this.changeMsg();
+    this.updateRankList();
+  }
+
+  updateRankList = () => {
+    const { name, score } = this.props;
+    const { urlImg } = this.state;
+
+    const newObj = {
+      name,
+      score,
+      urlImg,
+    };
+
+    const currList = JSON.parse(localStorage.getItem('ranking') || '[]');
+    currList.push(newObj);
+    localStorage.setItem('ranking', JSON.stringify(currList));
   }
 
   changeMsg = () => {
@@ -37,7 +53,7 @@ class Feedback extends React.Component {
 
     return (
       <div className="headerFBAll">
-        <header className="header-all">
+        <header>
           <img
             data-testid="header-profile-picture"
             src={ `https://www.gravatar.com/avatar/${urlImg}` }
@@ -47,13 +63,10 @@ class Feedback extends React.Component {
           <h2 data-testid="header-score">{ score }</h2>
         </header>
 
-        <div className="feedback">
-          <h2 data-testid="feedback-total-score">{ score }</h2>
-          <h2 data-testid="feedback-total-question">{ assertions }</h2>
-        </div>
-
         <div className="feedback-text">
           <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
+          <h2 data-testid="feedback-total-score">{ score }</h2>
+          <h2 data-testid="feedback-total-question">{ assertions }</h2>
         </div>
 
         <div className="buttons">

@@ -15,6 +15,7 @@ class Ranking extends React.Component {
   componentDidMount() {
     const arrayOfPlayers = JSON.parse(localStorage.getItem('ranking') || '[]');
     const ranking = arrayOfPlayers.sort((a, b) => b.score - a.score);
+    console.log(ranking);
     this.setState({ ranking });
   }
 

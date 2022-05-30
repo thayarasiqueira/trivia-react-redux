@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addPlayerAction, getToken } from '../redux/actions';
+import { addPlayerAction, getToken, addScoreAction } from '../redux/actions';
 import logo from '../trivia.png';
 
 class Login extends React.Component {
@@ -38,9 +38,11 @@ class Login extends React.Component {
 
   handleClickPlay = async () => {
     const { name, email } = this.state;
-    const { userLogin, tokenAction, history } = this.props;
+    const { userLogin, tokenAction, history, zerarScore } = this.props;
     await tokenAction();
     userLogin(name, email);
+    const ZERO = 0;
+    zerarScore(ZERO, ZERO);
     history.push('/game');
   }
 
@@ -96,12 +98,14 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   userLogin: (name, gravatarEmail) => dispatch(addPlayerAction(name, gravatarEmail)),
   tokenAction: () => dispatch(getToken()),
+  zerarScore: (score, assertions) => dispatch(addScoreAction(score, assertions)),
 });
 
 Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   userLogin: PropTypes.func.isRequired,
   tokenAction: PropTypes.func.isRequired,
+  zerarScore: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
