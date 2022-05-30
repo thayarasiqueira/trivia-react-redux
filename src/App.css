@@ -100,3 +100,8 @@ body {
 .nada {
   color: white;
 }
+
+.feedback {
+  display: flex;
+  justify-content: space-around;
+}
