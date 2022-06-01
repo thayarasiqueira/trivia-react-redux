@@ -14,9 +14,9 @@ class Feedback extends React.Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     const { gravatarEmail } = this.props;
-    const urlImg = await md5(gravatarEmail).toString();
+    const urlImg = md5(gravatarEmail).toString();
     this.setState({ urlImg });
     this.changeMsg();
     this.updateRankList();
@@ -53,7 +53,7 @@ class Feedback extends React.Component {
 
     return (
       <div className="headerFBAll">
-        <header>
+        <header className="header-feedback">
           <img
             data-testid="header-profile-picture"
             src={ `https://www.gravatar.com/avatar/${urlImg}` }
@@ -65,13 +65,16 @@ class Feedback extends React.Component {
 
         <div className="feedback-text">
           <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
-          <h2 data-testid="feedback-total-score">{ score }</h2>
-          <h2 data-testid="feedback-total-question">{ assertions }</h2>
+          <div className="feed-text-int">
+            <h3 data-testid="feedback-total-score">{ `Your score: ${score}`}</h3>
+            <h3 data-testid="feedback-total-question">{ `Your assertions: ${assertions}` }</h3>
+          </div>
         </div>
 
         <div className="buttons">
           <Link to="/">
             <button
+              className="btn-play-again"
               type="button"
               data-testid="btn-play-again"
             >
@@ -81,6 +84,7 @@ class Feedback extends React.Component {
 
           <Link to="/ranking">
             <button
+              className="btn-ranking"
               type="button"
               data-testid="btn-ranking"
             >

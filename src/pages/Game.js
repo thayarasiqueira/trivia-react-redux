@@ -145,6 +145,7 @@ class Game extends React.Component {
         <Header />
         <h1 data-testid="game-title" className="game-title">IT`S GAME TIME</h1>
         <Timer
+          className="timer"
           timer={ timer }
         />
         { questionState.length !== 0
@@ -209,6 +210,7 @@ class Game extends React.Component {
             type="button"
             onClick={ this.handleNextBtn }
             data-testid="btn-next"
+            className="next-btn"
           >
             Next
           </button>
@@ -232,15 +234,10 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   addScore: (score, assertions) => dispatch(addScoreAction(score, assertions)),
-// });
-
 Game.propTypes = {
   questions: PropTypes.shape.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
-  // addScore: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };

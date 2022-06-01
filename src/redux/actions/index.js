@@ -56,7 +56,6 @@ export const getQuestion = () => async (dispatch) => {
     const Logout = true;
     return Logout;
   }
-  // const obj = result.results;
   dispatch(addQuestionAction(result));
   const Logout = false;
   return Logout;

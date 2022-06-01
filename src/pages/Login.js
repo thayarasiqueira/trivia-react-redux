@@ -54,7 +54,7 @@ class Login extends React.Component {
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
 
-          <div className="formLoginAll">
+          <div className="form-login-all">
             <input
               name="name"
               type="text"
@@ -82,6 +82,7 @@ class Login extends React.Component {
 
             <Link to="/settings">
               <button
+                className="sett-btn"
                 type="button"
                 data-testid="btn-settings"
               >

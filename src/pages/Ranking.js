@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Header from '../componentes/Header';
 
 class Ranking extends React.Component {
   constructor() {
@@ -23,26 +24,29 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
 
     return (
-      <div>
+      <div className="ranking-all">
+        <Header />
         <h1 data-testid="ranking-title">Ranking</h1>
+
+        <section>
+          <ul className="lista-ranking">
+            {ranking.map((player, index) => (
+              <li key={ index }>
+                <p data-testid={ `player-name-${index}` }>{ player.name }</p>
+                <p data-testid={ `player-score-${index}` }>{ player.score }</p>
+              </li>))}
+          </ul>
+        </section>
 
         <Link to="/">
           <button
             type="button"
             data-testid="btn-go-home"
+            className="btn-play-again"
           >
             Play again
           </button>
         </Link>
-        <section>
-          <ul>
-            {ranking.map((player, index) => (
-              <li key={ index }>
-                <span data-testid={ `player-name-${index}` }>{ player.name }</span>
-                <span data-testid={ `player-score-${index}` }>{ player.score }</span>
-              </li>))}
-          </ul>
-        </section>
       </div>
     );
   }

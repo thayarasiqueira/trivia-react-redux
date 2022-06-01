@@ -62,11 +62,29 @@ body {
   }
 }
 
-.formLoginAll {
+/* Login */
+.form-login-all {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: stretch;
   margin: 20px;
+}
+
+.sett-btn {
+  width: 300px;
+}
+
+/* Game Page */
+.game-all {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-title {
+  color: red;
+  font-size: 50px;
 }
 
 .questionBox {
@@ -75,33 +93,87 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 70%;
+  margin-bottom: 15px;
+  max-width: 80%;
+  min-width: 70%;
 }
 
-.game-all {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.timer {
+  float: right;
 }
 
-.header-all {
-  background-color: darkslategray;
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-  width: 100%;
+.correct-answer {
+  border: solid 1px black;
+  margin: 3px;
 }
 
-.game-title {
-  color: rgb(107, 15, 15);
-  font-size: 40px;
+.incorrect-answer {
+  border: solid 1px black;
+  margin: 3px;
+}
+
+.next-btn {
+  border: 2px black solid;
+  font-weight: 600;
+  height: 20px;
+  width: 200px;
 }
 
 .nada {
   color: white;
 }
 
-.feedback {
+/* Header */
+.header-all {
+  background-color: rgb(68, 130, 130);
   display: flex;
   justify-content: space-around;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Feedback */
+.header-feedback {
+  background-color: rgb(68, 130, 130);
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  width: 100%;
+}
+
+.feed-text-int {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+
+.btn-play-again {
+  height: 25px;
+  margin: 5px;
+  width: 150px;
+}
+
+.btn-ranking {
+  height: 25px;
+  margin: 5px;
+  width: 150px;
+}
+
+/* Ranking */
+.ranking-all {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.lista-ranking {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* Geral */
+button {
+  border-radius: 10px;
 }
