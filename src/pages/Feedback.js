@@ -67,7 +67,9 @@ class Feedback extends React.Component {
           <h1 data-testid="feedback-text">{ feedbackMsg }</h1>
           <div className="feed-text-int">
             <h3 data-testid="feedback-total-score">{ `Your score: ${score}`}</h3>
-            <h3 data-testid="feedback-total-question">{ `Your assertions: ${assertions}` }</h3>
+            <h3 data-testid="feedback-total-question">
+              { `Your assertions: ${assertions}` }
+            </h3>
           </div>
         </div>
 
