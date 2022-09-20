@@ -1,4 +1,4 @@
-#Trivia Game
+# Trivia Game
 
 
 https://user-images.githubusercontent.com/98190097/191303173-bb3b3f8f-847f-41df-a361-9afe995d7efe.mp4
