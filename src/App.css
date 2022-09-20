@@ -2,6 +2,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: monospace;
 }
 
 .App {
@@ -125,20 +126,32 @@ body {
 
 /* Header */
 .header-all {
-  background-color: rgb(68, 130, 130);
+  background-color: rgb(66, 85, 85);
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 20px;
   width: 100%;
+  align-items: center;
+}
+
+.header-all h3, img{
+  margin-right: 2rem;
+  margin-left: 1rem;
 }
 
 /* Feedback */
 .header-feedback {
-  background-color: rgb(68, 130, 130);
+  background-color: rgb(66, 85, 85);
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 20px;
   width: 100%;
+  align-items: center;
+}
+
+.header-feedback h3, img{
+  margin-right: 2rem;
+  margin-left: 1rem;
 }
 
 .feed-text-int {
@@ -166,6 +179,15 @@ body {
   flex-direction: column;
 }
 
+.ranking-all h1{
+  font-size: 4rem;
+}
+
+.ranking-all button{
+  margin-top: 2rem;
+  width: 15rem;
+}
+
 .lista-ranking {
   align-self: center;
   display: flex;
@@ -173,7 +195,12 @@ body {
   justify-content: space-around;
 }
 
+
 /* Geral */
 button {
   border-radius: 10px;
+}
+
+button:hover {
+  background-color: #282c34;
 }
