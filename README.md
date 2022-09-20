@@ -1,3 +1,10 @@
+#Trivia Game
+
+
+https://user-images.githubusercontent.com/98190097/191303173-bb3b3f8f-847f-41df-a361-9afe995d7efe.mp4
+
+
+
 A quiz game based on the game Trivia using React and Redux, developing in group its functionalities according to the demands defined in a Kanban board with Trello.
 
 When one logs into the game, if the email is registered on the Gravatar site, its photo associated with the user person's profile will be shown at the top of the page.
